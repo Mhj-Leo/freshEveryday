@@ -1,0 +1,63 @@
+<template>
+    <div class="container">
+        <van-card
+            num="2"
+            price="2.00"
+            desc="描述信息"  
+            title="商品标题"
+            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        />
+        <van-card
+            num="2"
+            price="2.00"
+            desc="描述信息"  
+            title="商品标题"
+            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        />
+        <van-card
+            num="2"
+            price="2.00"
+            desc="描述信息"  
+            title="商品标题"
+            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        />
+        <van-card
+            num="2"
+            price="2.00"
+            desc="描述信息"  
+            title="商品标题"
+            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        />
+        <van-card
+            num="2"
+            price="2.00"
+            desc="描述信息"  
+            title="商品标题"
+            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        />
+        <van-card
+            num="2"
+            price="2.00"
+            desc="描述信息"  
+            title="商品标题"
+            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        />
+        <van-card
+            num="2"
+            price="2.00"
+            desc="描述信息"  
+            title="商品标题"
+            thumb="https://img.yzcdn.cn/vant/t-thirt.jpg"
+        />
+    </div>
+</template>
+<script>
+export default {
+    data(){
+        return{
+           active:true,
+            
+        }
+    },
+}
+</script>
