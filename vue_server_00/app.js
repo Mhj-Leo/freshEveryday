@@ -119,27 +119,10 @@ server.get("/cart",(req,res)=>{
     return;
   }
   //2:sql
-  var sql = "SELECT id,deviceName,price,num FROM freshEveryday_cart WHERE uid = ?";
+  var sql = "SELECT id,pic,title,price,num FROM freshEveryday_cart WHERE uid = ?";
   pool.query(sql,[uid],(err,result)=>{
     if(err)throw err;
     res.send({code:1,data:result})
   })
   //3:json
 })
-//删除购物车中商品
-server.get("/delItem",(req,res)=>{
-  //1:参数购物车id
-  var id = req.query.id;
-  //2:sql 删除指定数据
-  var sql = "DELETE FROM freshEveryday_cart WHERE id = ?";
-  //3:json
-  pool.query(sql,[id],(err,result)=>{
-    if(err)throw err;
-    console.log(result);
-    if(result.affectedRows>0){
-    res.send({code:1,msg:"删除成功"});
-  }else{
-    res.send({code:-1,msg:"删除失败"});
-  }
-  })
-});

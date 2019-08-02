@@ -1,6 +1,7 @@
 <template>
-    <div id="container">
-        <p class="title">注册</p>
+    <div class="container">
+        <p style="font-size:20px;color:#ff4891;margin-left:150px;">用户注册</p>
+    <div class="input" style="margin-bottom:20px;margin-top:40px">
         <mt-field type="text" 
             placeholder="请输入用户名"
             id="uname"
@@ -17,7 +18,8 @@
             placeholder="请输入手机号"
             id="phone"
         v-model="phone"></mt-field>
-        <mt-button type="primary" size="large"
+        </div>
+        <mt-button style="margin-top:40px;background: #ff4891;color:#fff" size="large"
         @click="reg">提交注册</mt-button>
     </div>
 </template>
@@ -86,6 +88,11 @@ export default {
 }
 </script>
 <style scoped>
+    .container{
+        background:transparent;
+        padding-top:5px;
+        margin-top:70px;
+        }
      .title{
         font-size:35px;
         color:#ff4891;

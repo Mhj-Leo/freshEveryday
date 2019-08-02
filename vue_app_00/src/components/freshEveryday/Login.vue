@@ -1,15 +1,24 @@
 <template>
     <div class="login_container">
-        <div class="input">
-            <p class="title">登录</p>
-            <mt-field placeholder="请输入手机号" 
+        <p style="color:#ff4891;margin-left:270px;" @click="reg">
+            新用户注册
+        </p>
+        <div class="input" style="margin-bottom:20px;">
+            <mt-field placeholder="请输入用户名" 
             v-model="uname"></mt-field>
-            <mt-field placeholder="请输入验证码"
+            <mt-field placeholder="请输入密码"
             v-model="upwd"></mt-field>
         </div>
         <div class="agree">
-            <mt-button type="primary" size="large"
+            <input type="checkbox" style="margin-left:30px;">
+            <span style="margin-left:30px;font-size:12px;color:#969696;">我已认真阅读、理解并同意
+                <a style="color:#ff4891;" href="">《每日优鲜用户协议》</a>
+            </span>
+            <mt-button style="margin-top:40px;background: #ff4891;color:#fff" size="large"
             @click="login">登录</mt-button>
+            <p style="margin:10px 30px;font-size:12px;color:#969696;font-weight:bold;">
+                为方便您及时查询订单信息，需要验证您的手机号来登录
+            </p>
         </div>
     </div>
 </template>
@@ -47,7 +56,7 @@ export default {
                 //1.判断服务器返回结果
                 //2.code:>0 跳转Home组件
                 if(result.data.code>0){
-                    this.$router.push("/")
+                    this.$router.push("/cart")
                 }
                 //3.创建Home.vue组件
                 //4.code:<0 交互提示框
@@ -55,19 +64,20 @@ export default {
                     this.$messagebox("提示","用户信息错误")
                 }
             })
+        },
+        reg(){
+            this.$router.push("/reg")   
         }
     },
 }
 </script>
 <style>
-    .login_container{background:#ff4891;padding-top:5px;}
+    .login_container{
+        background:transparent;
+        padding-top:5px;
+        margin-top:70px;
+        }
     .input{
         margin-top:40px;
-    }
-    .title{
-        font-size:35px;
-        color:#fff;
-        font-weight:bold;
-        margin:40px 150px;
     }
 </style>

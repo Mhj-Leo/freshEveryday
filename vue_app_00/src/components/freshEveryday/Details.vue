@@ -7,7 +7,7 @@
                 <img :src="product.banner1">
             </van-swipe-item>
             <van-swipe-item class="swipeitem">
-                <img :src="product.banner2"
+                <img :src="product.banner2">
             </van-swipe-item>
             <van-swipe-item class="swipeitem">
                 <img :src="product.banner3">

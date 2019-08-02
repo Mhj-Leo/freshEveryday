@@ -1,127 +1,66 @@
 <template>
     <div class="container">
-        <van-tree-select
-        :items="items"
-        :main-active-index="mainActiveIndex"
-        :active-id="activeId"
-        @click-nav="onClickNav"
-        @click-item="onClickItem"
-        />
+      <van-address-edit
+      :area-list="areaList"
+      show-postal
+      show-delete
+      show-set-default
+      show-search-result
+      :search-result="searchResult"
+      @save="onSave"
+      @delete="onDelete"
+      @change-detail="onChangeDetail"
+    />
     </div>
 </template>
 <script>
 export default {
     data(){
         return{
-                 items:[
-  {
-    // 导航名称
-    text: '所有城市',
-    // 该导航下所有的可选项
-    children: [
-      {
-        // 名称
-        text: '温州',
-        // id，作为匹配选中状态的标识
-        id: 1,
-        // 禁用选项
-        disabled: false
-      },
-      {
-        text: '杭州',
-        id: 2,
-        disabled: false
-      },
-      {
-        text: '南京',
-        id: 3,
-        disabled: false
-      },
-      {
-        text: '扬州',
-        id: 4,
-        disabled: false
-      },
-      {
-        text: '上海',
-        id: 5,
-        disabled: false
-      }
-    ]
+          areaList:
+          {
+  province_list: {
+    110000: '北京市',
+    120000: '天津市'
   },
-    {
-    // 导航名称
-    text: '江苏',
-    // 该导航下所有的可选项
-    children: [
-      {
-        // 名称
-        text: '南京',
-        // id，作为匹配选中状态的标识
-        id: 1,
-        // 禁用选项
-        disabled: false
-      },
-      {
-        text: '无锡',
-        id: 2,
-        disabled: false
-      },
-      {
-        text: '苏州',
-        id: 3,
-        disabled: false
-      },
-      {
-        text: '徐州',
-        id: 4,
-        disabled: false
-      },
-    ]
+  city_list: {
+    110100: '北京市',
+    110200: '县',
+    120100: '天津市',
+    120200: '县'
   },
-    {
-    // 导航名称
-    text: '浙江',
-    // 该导航下所有的可选项
-    children: [
-      {
-        // 名称
-        text: '温州',
-        // id，作为匹配选中状态的标识
-        id: 1,
-        // 禁用选项
-        disabled: false
-      },
-      {
-        text: '杭州',
-        id: 2,
-        disabled: false
-      },
-      {
-        text: '宁波',
-        id: 3,
-        disabled: false
-      },
-      {
-        text: '义乌',
-        id: 4,
-        disabled: false
-      },
-    ]
+  county_list: {
+    110101: '东城区',
+    110102: '西城区',
+    110105: '朝阳区',
+    110106: '丰台区',
+    120101: '和平区',
+    120102: '河东区',
+    120103: '河西区',
+    120104: '南开区',
+    120105: '河北区',
+    // ....
   }
-],
-      // 左侧高亮元素的index
-      mainActiveIndex: 0,
-      // 被选中元素的id
-      activeId: 1
-    };
+},
+          searchResult: []
+        }      
   },
-   methods: {
-    onClickNav(index) {
-      this.mainActiveIndex = index;
+  methods: {
+    onSave() {
+      Toast('save');
     },
-    onClickItem(data) {
-      this.activeId = data.id;
+    onDelete() {
+      Toast('delete');
+    },
+    onChangeDetail(val) {
+      if (val) {
+        this.searchResult = [{
+          name: '黄龙万科中心',
+          address: '杭州市西湖区'
+        }];
+      } else {
+        this.searchResult = [];
+      }
     }
   }
 }

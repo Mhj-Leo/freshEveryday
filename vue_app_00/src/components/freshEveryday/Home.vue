@@ -1,15 +1,13 @@
 <template>
 <div class="container">
-<!--顶部导航栏-->
-<van-nav-bar
-  title="我的每日优鲜"
-  left-text="返回"
-  right-text="我的地址"
-  left-arrow
-  @click-left="onClickLeft"
-  @click-right="onClickRight"
-/>
-<input type="text" placeholder="请输入关键词" class="search">
+  <div class="top" style="margin-top:20px;margin-bottom:20px;">
+      <img style="width:55px;height:14px;" 
+      src="../../../public/img/logo.png" alt="">
+      <span style="width:180px;" @click="jumpAddress">秦淮区人...</span>
+      <img style="width:20px;height:20px;" 
+      src="../../../public/img/下拉.png" alt="">
+      <input type="text" placeholder="请输入关键词" class="search">
+  </div>
 <div class="nav">
   <span>热销爆品</span>
   <span>0元菜场</span>
@@ -53,7 +51,7 @@ src="../../assets/advertisement.png">
     <p v-text="item.subTitle"></p>
     <div class="price">
       <p v-text="`￥${item.price}`"></p>
-      <img src="../../assets/cart.png" class='cart'>
+      <a href="#"><img src="../../assets/cart.png" class='cart'></a>
     </div>
   </div>
 </div>
@@ -94,24 +92,28 @@ export default {
                         }
                     }
                 },
-                onClickLeft() {
-                  this.$toast('返回');
-                },
-                onClickRight() {
+                jumpAddress(){
                   this.$router.push("/Address")
                 }
     },
 }
 </script>
 <style scoped>
+  .top{
+    line-height:50px;
+    position: relative;
+  }
 .search{
-    width:180px;
+    width:150px;
     height:28px;
+    position:absolute;
+    top:10px;
+    left:140px;
     border-radius:15px;
+    margin-left:70px;
     border:1px solid #eee;
-    margin:10px 180px;
     background: url("../../assets/search.png") no-repeat;
-    background-position: 130px;
+    background-position: 120px;
     background-size:contain;
 }
 .nav{

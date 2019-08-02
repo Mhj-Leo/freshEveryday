@@ -18,7 +18,7 @@
   </mt-tab-item>
   <mt-tab-item id="购物车" @click.native="changeState(3)">
     <img slot="icon" src="../../assets/购物车-未选中.png"
-    :focused="currentIndex[0].isSelect">
+    :focused="currentIndex[0].isSelect" @click="jumpCart">
     购物车
   </mt-tab-item>
   <mt-tab-item id="我的" @click.native="changeState(4)">
@@ -30,6 +30,7 @@
 </div>
 </template>
 <script>
+import { Dialog } from 'vant';
 export default {
     data(){
         return{
@@ -63,12 +64,25 @@ export default {
                 },
                 jumpSort(){
                     this.$router.push("/Sort")
-                }
+                },
+                jumpCart(){
+                    Dialog.confirm({
+                        title: '提示',
+                        message: '请先登录'
+                        }).then(() => {
+                            this.$router.push("/login")
+                        }).catch(() => {
+                            console.log("用户取消")
+                        });
+                    
+                },
     },
 }
 </script>
 <style scoped>
-.container{position:relative;}
+.container{
+    position:relative;
+    }
 .mint-tabbar>.mint-tab-item.is-selected{
         color:#ff4891;
     }

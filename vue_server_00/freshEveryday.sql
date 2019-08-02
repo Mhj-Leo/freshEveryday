@@ -24,7 +24,8 @@ CREATE TABLE freshEveryday_index(
 );
 CREATE TABLE freshEveryday_cart(
   id INT PRIMARY KEY AUTO_INCREMENT,
-  deviceName VARCHAR(512),
+  pic VARCHAR(512),
+  title VARCHAR(128),
   price VARCHAR(10),
   num INT,
   uid INT
@@ -58,13 +59,24 @@ INSERT INTO freshEveryday_laptop VALUES
 '轻点咬 小心喷出桃汁来','6.5'),
 (6,6,'img/details/banner6.jpg','img/details/banner6(2).jpg',
 'img/details/banner6(3).jpg','【2盒】伊利畅轻燕麦+草莓风味发酵乳250g「新人特惠」',
-'这杯酸奶太有料了 要嚼着吃','4.5');
+'这杯酸奶太有料了 要嚼着吃','4.5'),
+(7,7,'img/details/banner7.jpg','img/details/banner7(2).jpg',
+'img/details/banner7(3).jpg','泰国直采  正宗金枕头品种',
+'金枕榴莲1个3-4.5斤','89'),
+(8,8,'img/details/banner8.jpg','img/details/banner8(2).jpg',
+'img/details/banner8(3).jpg','冬枣中的冰糖心',
+'陕西大荔冬枣400g/盒','12.9'),
+(9,9,'img/details/banner9.jpg','img/details/banner9(2).jpg',
+'img/details/banner9(3).jpg','香甜盖过当季新款香水','绿宝香瓜2个400g起「新人特惠」','9.9'),
+(10,10,'img/details/banner10.jpg','img/details/banner10(2).jpg',
+'img/details/banner10(3).jpg','怦然心动','怦然心动（11朵粉色玫瑰花）','4.5'),
+(11,11,'img/details/banner11.jpg','img/details/banner11(2).jpg',
+'img/details/banner11(3).jpg','跟鲜花一起运过来的香蕉','进口香蕉1袋500g起','4.5'),
+(12,12,'img/details/banner12.jpg','img/details/banner12(2).jpg',
+'img/details/banner12(3).jpg','世界再大 不过一盘番茄炒蛋','番茄450-550g','4.5');
 /**************歌单*****************/
 INSERT INTO freshEveryday_cart VALUES
-(null,'佳能',2300,1,1),
-(null,'松下S1R',24198,1,1),
-(null,'富士X-T20',6699,1,1),
-(null,'GoPro Fusion',4598,1,1);
+(null,'img/chelizi.png','北美进口车厘子9.5行250g「新人特惠」',6.9,1,1);
 /************用户表*************/
 INSERT INTO freshEveryday_user VALUES
 (null,'tom',md5('123'),"316575809@qq.com","15152457851"),
@@ -84,6 +96,6 @@ INSERT INTO freshEveryday_index VALUES
 (NULL, '金枕榴莲1个3-4.5斤','img/liulian.jpg','泰国直采  正宗金枕头品种','21.3','Details.vue?lid=7',7, 7, 7),
 (NULL, '【陕西大荔冬枣400g/盒','img/zaozi.jpg','冬枣中的冰糖心','26.4','Details.vue?lid=8',8, 8, 8),
 (NULL, '绿宝香瓜2个400g起「新人特惠」','img/xianggua.jpg','芒果圈   和凯特王妃一样有名','33','Details.vue?lid=9',9, 9, 9),
-(NULL, '倾城之恋（绣球玫瑰花粉色系）','img/flower.jpg','绣球玫瑰花粉色系','129','Details.vue?lid=9',10, 10, 10),
-(NULL, '进口香蕉1袋500g起','img/banner.jpg','跟鲜花一起运过来的香蕉','31.2','Details.vue?lid=9',11, 11, 11),
-(NULL, '番茄450-550g','img/xihongshi.jpg','世界再大 不过一盘番茄炒蛋','2.5','Details.vue?lid=9',12, 12, 12);
+(NULL, '倾城之恋（绣球玫瑰花粉色系）','img/flower.jpg','绣球玫瑰花粉色系','129','Details.vue?lid=10',10, 10, 10),
+(NULL, '进口香蕉1袋500g起','img/banner.jpg','跟鲜花一起运过来的香蕉','31.2','Details.vue?lid=11',11, 11, 11),
+(NULL, '番茄450-550g','img/xihongshi.jpg','世界再大 不过一盘番茄炒蛋','2.5','Details.vue?lid=12',12, 12, 12);

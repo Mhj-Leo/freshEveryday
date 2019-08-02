@@ -17,7 +17,6 @@ export default new Router({
   routes: [
     {path:'/',component:ALL,children:[
       {path:'/',component:Home},
-      {path:'/Cart',component:Cart},
       {path:'/Mine',component:Mine},
       {path:'/Sort',component:Sort},
       {path:'/Details/:lid',component:Details,props:true},
@@ -25,5 +24,6 @@ export default new Router({
     ]},
     {path:'/Login',component:Login},
     {path:'/Reg',component:Reg},
+    {path:'/Cart',component:Cart},
   ]
 })
