@@ -95,6 +95,7 @@ export default {
                 jumpAddress(){
                   this.$router.push("/Address")
                 }
+                
     },
 }
 </script>

@@ -8,7 +8,6 @@ import Reg from "./components/freshEveryday/Reg"
 import Home from "./components/freshEveryday/Home"
 import Mine from "./components/freshEveryday/Mine"
 import Cart from "./components/freshEveryday/Cart"
-import Sort from "./components/freshEveryday/Sort"
 import Details from "./components/freshEveryday/Details"
 import Address from "./components/freshEveryday/Address"
 import ALL from "./views/ALL"
@@ -16,9 +15,10 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {path:'/',component:ALL,children:[
-      {path:'/',component:Home},
+      {path:'/',component:Home,meta: {
+        keepAlive: true
+      }},
       {path:'/Mine',component:Mine},
-      {path:'/Sort',component:Sort},
       {path:'/Details/:lid',component:Details,props:true},
       {path:'/Address',component:Address},
     ]},

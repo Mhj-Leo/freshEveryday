@@ -9,17 +9,17 @@
                       <p></p>
                       <div class="price">
                         <p v-text="`￥${item.price}`"></p>
-                        <button @click="decrease(index)">-</button>
+                        <button @click="decrease" :data-index="index">-</button>
                         <span class="num">{{item.num}}</span>
-                        <button @click="increse(index)">+</button>
+                        <button @click="increse" :data-index="index">+</button>
                       </div>
                     </div>
-                    <div class="bottom">
-                            <span>合计：</span>
-                            <span class="total" v-text="`￥${(item.price*item.num).toFixed(2)}`"></span>
-                            <a href="https://www.alipay.com/" class="submit">提交订单</a>
-                        </div>
                   </div>
+                  <div class="bottom">
+                    <span>合计：</span>
+                    <span class="total" v-text="`￥${total.toFixed(2)}`"></span>
+                    <a href="https://www.alipay.com/" class="submit">提交订单</a>
+                </div>
     </div>
 </template>
 <script>
@@ -27,8 +27,8 @@
         data(){
             return{
                 list:[],
-            }
-        },
+        }
+    },
         created(){
             var url = "cart";
                 //2.发送ajax请求
@@ -39,18 +39,25 @@
                 })
         },
         methods:{
-                increse(index){
-                    this.list[index].num++
+                increse(e){
+                    /*获取点击的按钮下标*/
+                    var idx=e.target.dataset.index;
+                    /*将对应商品的个数加一*/
+                    this.list[idx].num++;
                 },
-                decrease(index){
-                    if(this.list[index].num===1)return
-                    this.list[index].num--
+                decrease(e){
+                    /*获取点击的按钮下标*/
+                    var idx=e.target.dataset.index;
+                    if(this.list[idx].num===1)return
+                    /*将对应商品的个数减一*/
+                    this.list[idx].num--
                 },
         },
         computed:{
+            /*计算商品总计并返回结果到页面*/
                 total(){
                     var sum=0;
-                    this.products.forEach(function(item){
+                    this.list.forEach(function(item){
                         sum+=item.price*item.num;
                     })
                     return sum;
@@ -81,7 +88,7 @@
     flex-wrap: nowrap;
     border:1px solid #eee;
     position:absolute;
-    top:600px;
+    top:800px;
     line-height: 60px;
 }
 .submit{

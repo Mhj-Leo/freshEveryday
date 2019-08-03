@@ -10,12 +10,12 @@
             v-model="upwd"></mt-field>
         </div>
         <div class="agree">
-            <input type="checkbox" style="margin-left:30px;">
+            <input type="checkbox" style="margin-left:30px;" @click="agree">
             <span style="margin-left:30px;font-size:12px;color:#969696;">我已认真阅读、理解并同意
                 <a style="color:#ff4891;" href="">《每日优鲜用户协议》</a>
             </span>
             <mt-button style="margin-top:40px;background: #ff4891;color:#fff" size="large"
-            @click="login">登录</mt-button>
+            @click="login" :disabled="disabled">登录</mt-button>
             <p style="margin:10px 30px;font-size:12px;color:#969696;font-weight:bold;">
                 为方便您及时查询订单信息，需要验证您的手机号来登录
             </p>
@@ -28,9 +28,17 @@ export default {
         return{
             uname:"",
             upwd:"",
+            disabled: true
         }
     },
     methods:{
+        agree(e){
+            if(e.target.checked){
+                this.disabled=false
+            }else{
+                this.disabled=true
+            }
+        },
         login(){
             //完成登录
             //1.获取用户名和密码

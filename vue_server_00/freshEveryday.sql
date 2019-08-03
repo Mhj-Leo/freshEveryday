@@ -76,15 +76,15 @@ INSERT INTO freshEveryday_laptop VALUES
 'img/details/banner12(3).jpg','世界再大 不过一盘番茄炒蛋','番茄450-550g','4.5');
 /**************歌单*****************/
 INSERT INTO freshEveryday_cart VALUES
-(null,'img/chelizi.png','北美进口车厘子9.5行250g「新人特惠」',6.9,1,1);
+(null,'img/chelizi.png','北美进口车厘子9.5行250g「新人特惠」',6.9,1,1),
+(null,'img/zaozi.jpg','新疆西州蜜瓜1个2.5斤起「新人特惠」',16.9,1,1),
+(null,'img/xianggua.jpg','绿宝香瓜2个400g起「新人特惠」',8.9,1,1);
 /************用户表*************/
 INSERT INTO freshEveryday_user VALUES
 (null,'tom',md5('123'),"316575809@qq.com","15152457851"),
 (null,'mhj',md5('123456'),"316575809@qq.com","15152457851"),
 (null,'jerry',md5('123'),"316575809@qq.com","15152457851"),
-(null,'haodadi',md5('123456'),"316575809@qq.com","15152457851"),
-(null,'wangjingan',md5('123111'),"316575809@qq.com","15152457851"),
-(null,'hailang',md5('2222'),"316575809@qq.com","15152457851");
+(null,'kjh',md5('123456'),"316575809@qq.com","15152457851");
 /*首页*/
 INSERT INTO freshEveryday_index VALUES
 (NULL, '北美进口车厘子9.5行250g「新人特惠」','img/chelizi.png','果径超大 吃过瘾','6.9','Details.vue?lid=1',1, 1, 1),

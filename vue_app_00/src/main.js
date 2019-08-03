@@ -3,6 +3,9 @@ import App from './App.vue'
 import router from './router'
 //以上三行不要动保存原来位置
 //原因:引入有序
+import MyHeader from './components/freshEveryday/MyHeader'
+//将对象变为全局组件
+Vue.component("my-header",MyHeader);
 //第三方组件库在下面引入
 //完整引入vant组件库
 import Vant from 'vant';
