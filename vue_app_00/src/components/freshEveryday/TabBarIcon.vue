@@ -8,7 +8,7 @@
   </mt-tab-item>
   <mt-tab-item id="分类" @click.native="changeState(1)">
     <img slot="icon" src="../../assets/分类-未选中.png"
-    :focused="currentIndex[0].isSelect" @click="jumpSort">
+    :focused="currentIndex[0].isSelect">
     分类
   </mt-tab-item>
   <mt-tab-item id="发现" @click.native="changeState(2)">
@@ -61,9 +61,6 @@ export default {
                 },
                 jumpMine(){
                      this.$router.push("/Mine")
-                },
-                jumpSort(){
-                    this.$router.push("/Sort")
                 },
                 jumpCart(){
                     Dialog.confirm({

@@ -30,13 +30,14 @@
         }
     },
         created(){
-            var url = "cart";
-                //2.发送ajax请求
-                this.axios.get(url).then(result=>{
-                    console.log(result)
-                    this.list=result.data.data;
-                    console.log(this.list)
-                })
+                // 获取购物车字符串
+                var str=sessionStorage.getItem("cart");
+                // 将字符串转为数组
+                var cart=JSON.parse(str);
+                // console.log(cart);
+                // 将购物车数组放入data数据中
+                this.list=cart;
+                console.log(this.list)
         },
         methods:{
                 increse(e){
@@ -66,9 +67,6 @@
     }
 </script>
 <style scoped>
-    .container{
-        height:550px;
-    }
     .product-item{
         display: flex;
         position:relative;

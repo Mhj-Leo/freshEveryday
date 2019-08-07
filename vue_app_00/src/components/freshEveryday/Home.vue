@@ -40,8 +40,7 @@
   <img src="../../assets/jicard.png">
   <img src="../../assets/market.png">
 </div>
-<img class="advertisement"
-src="../../assets/advertisement.png">
+<img class="advertisement" src="../../assets/advertisement.png">
 <div v-for="(item,index) of productList" :key="index" class="product-item">
   <div class="product-item-img">
     <router-link :to="`/details/${item.href.split('=')[1]}`"><img :src="item.pic"></router-link>
@@ -51,16 +50,22 @@ src="../../assets/advertisement.png">
     <p v-text="item.subTitle"></p>
     <div class="price">
       <p v-text="`￥${item.price}`"></p>
-      <a href="#"><img src="../../assets/cart.png" class='cart'></a>
+      <a href="#"><img :data-index="index"
+        @click="pushIntoCart" src="../../assets/cart.png" class='cart'></a>
     </div>
   </div>
 </div>
+<button @click="loadMore" 
+ style="width:100%;height:45px;background:#ff4891;color:#fff;
+ border:none;">加载更多</button>
 </div>
 </template>
 <script>
 export default {
     data(){
         return{
+            pno:0,//页码
+            ps:5,//页大小
             value:'',
             selected:true,
             productList:[],
@@ -77,10 +82,53 @@ export default {
             var url="/";//请求地址
             this.axios.get(url).then(result=>{
 				    this.productList=result.data;
-				    console.log(result)
-            })
+            }),
+            //再次调用，重新请求数据
+            this.loadMore()
   },
     methods:{
+      loadMore(){//加载更多主页面商品的数据
+            var url = "home";
+            //当前页码加一
+            this.pno++;
+            //创建一个参数对象
+            var obj = {pno:this.pno,pageSize:this.ps};
+            this.axios.get(url,{params:obj}).then(result=>{
+                // console.log(result.data.data);
+                //数据的覆盖
+                //this.list = result.data.data;
+                //数据的追加
+                var rows = this.productList.concat (result.data.data);
+                this.productList = rows;
+                // console.log(this.productList)
+            })
+        },
+          pushIntoCart(e){
+            //将商品添加进购物车
+            //定义一个空的购物车
+            var idx = e.target.dataset.index
+            // console.log(idx)
+            var cart = []
+            for(var i=0;i<this.productList.length;i++){
+              //遍历请求回来的购物车列表
+              var cart1 = {}
+              //将图片，价格，数量，标题加入定义的空购物车
+              cart1.pic=this.productList[idx].pic;
+              cart1.price=this.productList[idx].price;
+              cart1.num=this.productList[idx].num;
+              cart1.title=this.productList[idx].title;
+            }
+            // 放入购物车数组
+            cart.push(cart1);
+            // console.log(cart)
+            // 将购物车数组转为JSON字符串str
+            var str=JSON.stringify(cart);
+            // 将str放入sessionStorage中
+            sessionStorage.setItem("cart",str);
+          // console.log(sessionStorage.cart);
+          // 跳转到购物车界面
+            this.$router.push("/cart");
+          },
           changeState(n){
                     //n为当前按钮下标
                     //创建循环数据

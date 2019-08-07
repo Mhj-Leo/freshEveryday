@@ -110,7 +110,7 @@ server.get("/details",(req,res)=>{
     res.send(output);
   }
 })
-//购物车
+//登录用户的购物车显示
 server.get("/cart",(req,res)=>{
   //1:参数(无参数)
   var uid = req.session.uid;
@@ -126,3 +126,48 @@ server.get("/cart",(req,res)=>{
   })
   //3:json
 })
+
+// // 功能：插入商品信息 接口
+// server.get("/cart",(req,res)=>{
+//   var obj=req.query;
+//   console.log(obj);
+//   var sql="INSERT INTO freshEveryday_cart SET ? ";
+//   pool.query(sql,obj,(err,result)=>{
+//     if(err) throw err;
+//     console.log(result);
+//     if(result.affectedRows==1){
+//       res.send({code:1,msg:"插入成功"});
+//     }else{
+//       res.send({code:-1,msg:"插入失败"});
+//     }
+    
+//   })
+// })
+
+//功能：主页面商品分页显示
+server.get("/home",(req,res)=>{
+  //1.参数
+  var pno = req.query.pno;
+  var ps = req.query.pageSize;
+  //2.设置默认值
+  if(!pno){pno = 1;}
+  if(!ps){ps = 4;}
+  //3.创建两条sql语句执行嵌套完成
+  var sql = "SELECT pid,title,price,subTitle,pic,href FROM freshEveryday_index LIMIT ?,?";
+  var offset = (pno-1)*ps;
+  ps = parseInt(ps);
+  pool.query(sql,[offset,ps],(err,result)=>{
+    if(err)throw err;
+    var obj = {code:1,msg:"查询成功",data:result};
+    var sql = "SELECT count(*) AS c FROM freshEveryday_index";
+    pool.query(sql,(err,result)=>{
+      if(err)throw err;
+      //result[{c:43}]
+      var pc = Math.ceil(result[0].c/ps);
+      obj.pc=pc;
+      res.send(obj);
+    })
+  })
+  //4.返回值
+  //{code:1,msg:"查询成功",data:[],pageCount:11}
+});
