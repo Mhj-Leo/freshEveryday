@@ -10,20 +10,20 @@ import Mine from "./components/freshEveryday/Mine"
 import Cart from "./components/freshEveryday/Cart"
 import Details from "./components/freshEveryday/Details"
 import Address from "./components/freshEveryday/Address"
+import Submit from "./components/freshEveryday/Submit"
 import ALL from "./views/ALL"
 Vue.use(Router)
 export default new Router({
   routes: [
     {path:'/',component:ALL,children:[
-      {path:'/',component:Home,meta: {
-        keepAlive: true
-      }},
+      {path:'/',component:Home},
       {path:'/Mine',component:Mine},
       {path:'/Details/:lid',component:Details,props:true},
       {path:'/Address',component:Address},
+      {path:'/Submit',component:Submit},
+      {path:'/Cart',component:Cart},
     ]},
     {path:'/Login',component:Login},
     {path:'/Reg',component:Reg},
-    {path:'/Cart',component:Cart},
   ]
 })

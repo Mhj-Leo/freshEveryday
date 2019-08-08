@@ -6,19 +6,17 @@
                     </div>
                     <div class="item-detail">
                       <p v-text="item.title"></p>
-                      <p></p>
                       <div class="price">
                         <p v-text="`￥${item.price}`"></p>
-                        <button @click="decrease" :data-index="index">-</button>
-                        <span class="num">{{item.num}}</span>
-                        <button @click="increse" :data-index="index">+</button>
+                        <button :data-index="index" class="delItem" @click="delItem">删除</button>
                       </div>
                     </div>
                   </div>
+                  <p class="empty" :class="bClass">空空如也</p>
+                  <button class="goToAdd" :class="bClass"
+                  @click="goToAdd">赶紧去添加！</button>
                   <div class="bottom">
-                    <span>合计：</span>
-                    <span class="total" v-text="`￥${total.toFixed(2)}`"></span>
-                    <a href="https://www.alipay.com/" class="submit">提交订单</a>
+                    <button class="pay" @click="pay">前往支付</button>
                 </div>
     </div>
 </template>
@@ -27,46 +25,97 @@
         data(){
             return{
                 list:[],
+                bClass:{
+                    hide:true
+                }
         }
     },
         created(){
-                // 获取购物车字符串
-                var str=sessionStorage.getItem("cart");
-                // 将字符串转为数组
-                var cart=JSON.parse(str);
-                // console.log(cart);
-                // 将购物车数组放入data数据中
-                this.list=cart;
-                console.log(this.list)
+            this.load()
+                
         },
         methods:{
-                increse(e){
-                    /*获取点击的按钮下标*/
-                    var idx=e.target.dataset.index;
-                    /*将对应商品的个数加一*/
-                    this.list[idx].num++;
+            load(){
+                    var url="/cart";
+                    this.axios.get(url,{param:{}}).then(result=>{
+                    // 如果查到数据，显示列表
+                    this.list=result.data.data;
+                    // console.log(this.list)
+                    })
                 },
-                decrease(e){
-                    /*获取点击的按钮下标*/
-                    var idx=e.target.dataset.index;
-                    if(this.list[idx].num===1)return
-                    /*将对应商品的个数减一*/
-                    this.list[idx].num--
+                pay(){
+                    this.$router.push("/Submit")
                 },
+                goToAdd(){
+                    this.$router.push("/")
+                },
+                delItem(e){
+                //1.获取当前商品id
+                var idx=e.target.dataset.index;
+                console.log(idx)
+                //2.显示交互确认框
+                //3.如果用户选择“确认”
+                this.$messagebox.confirm("确认执行操作").then(action=>{
+                // //4.发送ajax请求删除数据
+                // var url="delItem";
+                // var obj={id:id}
+                // this.axios.get(url,{params:obj}).then(result=>{
+                    //从页面上删除商品
+                    this.list.splice(idx,1)
+                    if(this.list.length==0){
+                        this.$toast('您的购物车空啦！')
+                        this.bClass.hide=!this.bClass.hide;
+                    }
+                    //重新加载数据，等于刷新
+                    // this.load();
+                    this.$messagebox("提示","删除成功")
+                // })
+                }).catch(err=>{
+                    return;
+                })
+            },
         },
         computed:{
-            /*计算商品总计并返回结果到页面*/
-                total(){
-                    var sum=0;
-                    this.list.forEach(function(item){
-                        sum+=item.price*item.num;
-                    })
-                    return sum;
-                }
+
             },
     }
 </script>
 <style scoped>
+    .hide{
+        display:none
+    }
+    .container{
+        height:900px;
+        position:relative;
+    }
+    .empty{
+        position: absolute;
+        top:100px;
+        left:50px;
+        color:#eee;
+        font-family:'微软雅黑';
+        font-weight:bold;
+        font-size:70px;
+    }
+    .goToAdd{
+        background:#ff4891;
+        color:#fff;
+        border:none;
+        width:110px;
+        position:absolute;
+        top:200px;
+        left:130px;
+        height:30px;
+        line-height: 30px;
+    }
+    .delItem{
+        background:#ff4891;
+        color:#fff;
+        border:none;
+        width:50px;
+        height:30px;
+        line-height: 30px;
+    }
     .product-item{
         display: flex;
         position:relative;
@@ -81,15 +130,13 @@
 .bottom{
     width:100%;
     height:60px;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    border:1px solid #eee;
+    border:none;
     position:absolute;
-    top:800px;
+    top:900px;
+    left:220px;
     line-height: 60px;
 }
-.submit{
+.pay{
     background:#ff4891;
     color:#fff;
     border:none;
@@ -98,9 +145,6 @@
     text-align:center;
     line-height: 48px;
     margin-top:5px;
-}
-.total{
-    color:#ff4891;
 }
 .product-item-img{
   width:120px;
@@ -125,14 +169,6 @@
   flex-wrap: nowrap;
   color:#ff4891;
   margin-top:30px;
-}
-.price button{
-    background:#ff4891;
-    color:#fff;
-    border:none;
-    width:40px;
-    height:30px;
-    line-height: 30px;
 }
 .price span{
     margin-top:5px;

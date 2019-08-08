@@ -63,6 +63,9 @@ export default {
                      this.$router.push("/Mine")
                 },
                 jumpCart(){
+                    /*判断：如果用户没有登录，提示请先登录，
+                    如果用户已经登录，就跳转到购物车*/
+                    if(!sessionStorage.getItem("uid")){
                     Dialog.confirm({
                         title: '提示',
                         message: '请先登录'
@@ -72,7 +75,10 @@ export default {
                             console.log("用户取消")
                         });
                     
-                },
+                }else{
+                    this.$router.push("/cart")
+                }
+            }
     },
 }
 </script>

@@ -67,6 +67,7 @@ export default {
             pno:0,//页码
             ps:5,//页大小
             value:'',
+            cart:[],
             selected:true,
             productList:[],
             currentIndex:[
@@ -108,9 +109,9 @@ export default {
             //定义一个空的购物车
             var idx = e.target.dataset.index
             // console.log(idx)
-            var cart = []
+            // var cart = []
             for(var i=0;i<this.productList.length;i++){
-              //遍历请求回来的购物车列表
+              //遍历请求回来的商品列表
               var cart1 = {}
               //将图片，价格，数量，标题加入定义的空购物车
               cart1.pic=this.productList[idx].pic;
@@ -119,15 +120,15 @@ export default {
               cart1.title=this.productList[idx].title;
             }
             // 放入购物车数组
-            cart.push(cart1);
+            this.cart.push(cart1);
             // console.log(cart)
             // 将购物车数组转为JSON字符串str
-            var str=JSON.stringify(cart);
+            var str=JSON.stringify(this.cart);
             // 将str放入sessionStorage中
             sessionStorage.setItem("cart",str);
           // console.log(sessionStorage.cart);
           // 跳转到购物车界面
-            this.$router.push("/cart");
+            this.$router.push("Submit");
           },
           changeState(n){
                     //n为当前按钮下标

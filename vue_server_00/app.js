@@ -126,24 +126,39 @@ server.get("/cart",(req,res)=>{
   })
   //3:json
 })
-
-// // 功能：插入商品信息 接口
-// server.get("/cart",(req,res)=>{
-//   var obj=req.query;
-//   console.log(obj);
-//   var sql="INSERT INTO freshEveryday_cart SET ? ";
-//   pool.query(sql,obj,(err,result)=>{
-//     if(err) throw err;
-//     console.log(result);
-//     if(result.affectedRows==1){
-//       res.send({code:1,msg:"插入成功"});
-//     }else{
-//       res.send({code:-1,msg:"插入失败"});
-//     }
+// 功能：插入商品信息 接口
+server.get("/submit",(req,res)=>{
+  var obj=req.query;
+  // console.log(obj);
+  var sql="INSERT INTO freshEveryday_cart SET ? ";
+  pool.query(sql,obj,(err,result)=>{
+    if(err) throw err;
+    console.log(result);
+    if(result.affectedRows==1){
+      res.send({code:1,msg:"添加成功"});
+    }else{
+      res.send({code:-1,msg:"添加失败"});
+    }
     
+  })
+})
+// //功能四:删除购物车中商品
+// server.get("/delItem",(req,res)=>{
+//   //1:参数购物车id
+//   var id = req.query.id;
+//   //2:sql 删除指定数据
+//   var sql = "DELETE FROM freshEveryday_cart WHERE id = ?";
+//   //3:json
+//   pool.query(sql,[id],(err,result)=>{
+//     if(err)throw err;
+//     console.log(result);
+//     if(result.affectedRows>0){
+//     res.send({code:1,msg:"删除成功"});
+//   }else{
+//     res.send({code:-1,msg:"删除失败"});
+//   }
 //   })
-// })
-
+// });
 //功能：主页面商品分页显示
 server.get("/home",(req,res)=>{
   //1.参数

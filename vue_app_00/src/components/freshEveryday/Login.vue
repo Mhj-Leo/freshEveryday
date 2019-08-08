@@ -64,9 +64,10 @@ export default {
                 //1.判断服务器返回结果
                 //2.code:>0 跳转Home组件
                 if(result.data.code>0){
-                    // sessionStorage.setItem("uname",n);
-                    // sessionStorage.setItem("uid",result.data.uid);
-                    console.log(sessionStorage);
+                    //将登录用户的uname和uid保存到sessionStorage
+                    sessionStorage.setItem("uname",n);
+                    sessionStorage.setItem("uid",result.data.uid);
+                    // console.log(sessionStorage);
                     this.$router.push("/cart")
                 }
                 //3.创建Home.vue组件
