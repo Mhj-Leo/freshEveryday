@@ -72,7 +72,7 @@ export default {
                         }).then(() => {
                             this.$router.push("/login")
                         }).catch(() => {
-                            console.log("用户取消")
+                            this.$toast("用户取消")
                         });
                     
                 }else{

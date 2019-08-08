@@ -31,8 +31,7 @@
         }
     },
         created(){
-            this.load()
-                
+            this.load()    
         },
         methods:{
             load(){
@@ -44,7 +43,12 @@
                     })
                 },
                 pay(){
-                    this.$router.push("/Submit")
+                    this.$messagebox.confirm("确认支付？").then(action=>{
+                        this.$messagebox("支付成功")
+             })
+             .catch(err=>{
+                this.$toast("支付取消")
+             });
                 },
                 goToAdd(){
                     this.$router.push("/")
