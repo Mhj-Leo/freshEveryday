@@ -1,5 +1,8 @@
 <template>
     <div class="container">
+            <div class="title">
+                <span>{{uname}}</span>的购物车
+            </div>
             <div v-for="(item,index) of list" :key="index" class="product-item">
                     <div class="product-item-img">
                       <img :src="item.pic">
@@ -27,7 +30,8 @@
                 list:[],
                 bClass:{
                     hide:true
-                }
+                },
+                uname:sessionStorage.getItem("uname")
         }
     },
         created(){
@@ -90,6 +94,11 @@
 <style scoped>
     .hide{
         display:none
+    }
+    .title span{
+        color:#ff4891;
+        font-size:20px;
+        font-weight:bold;
     }
     .container{
         height:1500px;
