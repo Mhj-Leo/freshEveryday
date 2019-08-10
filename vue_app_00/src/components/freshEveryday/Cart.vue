@@ -44,7 +44,11 @@
                 },
                 pay(){
                     this.$messagebox.confirm("确认支付？").then(action=>{
-                        this.$messagebox("支付成功")
+                        if(this.list.length==0){
+                            this.$toast('您的购物车已空！')
+                        }else{
+                            this.$messagebox("支付成功")
+                        }
              })
              .catch(err=>{
                 this.$toast("支付取消")
@@ -59,20 +63,19 @@
                 console.log(idx)
                 //2.显示交互确认框
                 //3.如果用户选择“确认”
-                this.$messagebox.confirm("确认执行操作").then(action=>{
+                this.$messagebox.confirm("确认删除此商品？").then(action=>{
                 // //4.发送ajax请求删除数据
                 // var url="delItem";
                 // var obj={id:id}
                 // this.axios.get(url,{params:obj}).then(result=>{
                     //从页面上删除商品
                     this.list.splice(idx,1)
-                    if(this.list.length==0){
+                    if(this.list.length==0){//如果购物车已空
                         this.$toast('您的购物车空啦！')
                         this.bClass.hide=!this.bClass.hide;
                     }
                     //重新加载数据，等于刷新
                     // this.load();
-                    this.$messagebox("提示","删除成功")
                 // })
                 }).catch(err=>{
                     return;
@@ -89,7 +92,7 @@
         display:none
     }
     .container{
-        height:900px;
+        height:1500px;
         position:relative;
     }
     .empty{
@@ -146,6 +149,9 @@
     border:none;
     width:130px;
     height:48px;
+    position: absolute;
+    top:500px;
+    left:20px;
     text-align:center;
     line-height: 48px;
     margin-top:5px;

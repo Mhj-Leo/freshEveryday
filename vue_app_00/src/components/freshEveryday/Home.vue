@@ -67,9 +67,9 @@ export default {
             pno:0,//页码
             ps:5,//页大小
             value:'',
-            cart:[],
             selected:true,
             productList:[],
+            // cart:[],
             currentIndex:[
                     {isSelect:true},
                     {isSelect:false},
@@ -120,13 +120,9 @@ export default {
               cart1.title=this.productList[idx].title;
             }
             // 放入购物车数组
-            this.cart.push(cart1);
-            // console.log(cart)
-            // 将购物车数组转为JSON字符串str
-            var str=JSON.stringify(this.cart);
-            // 将str放入sessionStorage中
-            sessionStorage.setItem("cart",str);
-          // console.log(sessionStorage.cart);
+            // this.cart.push(cart1);
+            //通知数据仓库触发add操作,并传输cart1值，将cart1 push到cart中
+            this.$store.commit('add',cart1)
           // 跳转到购物车界面
             this.$router.push("Submit");
           },

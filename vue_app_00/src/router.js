@@ -11,7 +11,9 @@ import Cart from "./components/freshEveryday/Cart"
 import Details from "./components/freshEveryday/Details"
 import Address from "./components/freshEveryday/Address"
 import Submit from "./components/freshEveryday/Submit"
+// import CodeTest from "./components/freshEveryday/CodeTest"
 import ALL from "./views/ALL"
+import SIdentify from "./views/SIdentify"
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -25,5 +27,7 @@ export default new Router({
     ]},
     {path:'/Login',component:Login},
     {path:'/Reg',component:Reg},
+    // {path:'/CodeTest',component:CodeTest},
+    {path:'/SIdentify',component:SIdentify},
   ]
 })

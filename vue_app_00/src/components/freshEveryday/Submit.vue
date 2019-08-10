@@ -19,7 +19,7 @@
                     <span>合计：</span>
                     <span class="total" v-text="`￥${total.toFixed(2)}`"></span>
                     <button class="continue" @click="continueAdd">继续添加</button>
-                    <button class="submit" @click="submitOrder">提交订单</button>
+                    <button class="submit" @click="submitOrder">添加购物车</button>
                 </div>
     </div>
 </template>
@@ -27,18 +27,12 @@
     export default{
         data(){
             return{
-                list:[],
+                // list:[],
         }
     },
         created(){
-                // 获取购物车字符串
-                var str=sessionStorage.getItem("cart");
-                // 将字符串转为数组
-                var cart=JSON.parse(str);
-                // console.log(cart);
-                // 将购物车数组放入data数据中
-                this.list=cart;
-                console.log(this.list)
+            // this.list=this.$store.getters.cart
+            console.log(this.list)
         },
         methods:{
                 increse(e){
@@ -59,7 +53,8 @@
                     this.$router.push("/")
                 },
                 submitOrder(){
-                    this.$messagebox.confirm("确认支付？")
+                    //将vuex中的购物车内容插入到数据库中
+                    this.$messagebox.confirm("确认添加？")
                     .then(action=>{
                         for(var elem of this.list){
                             var p=elem.pic;
@@ -79,6 +74,10 @@
                 }
         },
         computed:{
+            list(){
+                //获取共享仓库中的cart数据放入list中
+                return this.$store.getters.cart;
+            },
             /*计算商品总计并返回结果到页面*/
                 total(){
                     var sum=0;
@@ -92,7 +91,7 @@
 </script>
 <style scoped>
     .container{
-        height:600px;
+        height:1000px;
         position:relative;
     }
     .product-item{
@@ -114,7 +113,7 @@
     flex-wrap: nowrap;
     border:1px solid #eee;
     position:absolute;
-    top:600px;
+    top:1000px;
     line-height: 60px;
 }
 .submit,.continue{

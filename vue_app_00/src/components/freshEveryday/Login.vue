@@ -8,6 +8,12 @@
             v-model="uname"></mt-field>
             <mt-field placeholder="请输入密码"
             v-model="upwd"></mt-field>
+            <mt-field placeholder="请输入验证码"
+            v-model="code"></mt-field>
+            <!-- 验证码组件插入 -->
+            <div class="login-code" @click="refreshCode">
+                <SIdentify :identifyCode="identifyCode"></SIdentify>
+            </div>
         </div>
         <div class="agree">
             <input type="checkbox" style="margin-left:30px;" @click="agree">
@@ -22,16 +28,40 @@
         </div>
     </div>
 </template>
-<<script>
+<script>
+import SIdentify from '../../views/SIdentify'
 export default {
     data(){
         return{
             uname:"",
             upwd:"",
-            disabled: true
+            disabled: true,
+            identifyCodes: "1234567890",
+            identifyCode: "",
+            code:"",//text框输入的验证码
         }
     },
+    created() {
+        //初始化验证码
+        this.refreshCode();
+    },
     methods:{
+        refreshCode(){
+            //点击刷新验证码图片
+            this.identifyCode = "";
+            this.makeCode(this.identifyCodes, 4);
+        },
+        randomNum(min, max) {
+            //随机生成数字
+           return Math.floor(Math.random() * (max - min) + min);
+        },
+        makeCode(o, l) {
+            for (let i = 0; i < l; i++) {
+                this.identifyCode += this.identifyCodes[
+                    this.randomNum(0, this.identifyCodes.length)
+                ];
+            }
+     },
         agree(e){
             if(e.target.checked){
                 this.disabled=false
@@ -68,7 +98,6 @@ export default {
                     sessionStorage.setItem("uname",n);
                     sessionStorage.setItem("uid",result.data.uid);
                     // console.log(sessionStorage);
-                    this.$router.push("/cart")
                 }
                 //3.创建Home.vue组件
                 //4.code:<0 交互提示框
@@ -76,10 +105,28 @@ export default {
                     this.$messagebox("提示","用户信息错误")
                 }
             })
+            //判断验证码内容与用户输入的内容
+            if(this.code==""){
+                this.$toast('请输入验证码！');
+                return;
+            }
+            if(this.identifyCode!==this.code){
+                this.code="";
+                this.refreshCode();
+                this.$toast("验证码错误")
+                return;
+            }
+            //跳转购物车
+            this.$router.push("/cart")
         },
         reg(){
             this.$router.push("/reg")   
         }
+    },
+    components:{SIdentify},
+    mounted() {
+        this.identifyCode = "";
+        this.makeCode(this.identifyCodes, 4);
     },
 }
 </script>
