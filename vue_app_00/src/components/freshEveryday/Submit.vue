@@ -67,6 +67,7 @@
                             this.axios.get("submit",{params:obj})
                             .then(result=>{
                                 this.$toast('添加成功')
+                                this.$router.push("cart")
                             });
                         }
                     }).catch(err=>{
