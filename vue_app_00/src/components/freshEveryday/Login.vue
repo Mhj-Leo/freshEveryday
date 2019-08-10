@@ -86,6 +86,17 @@ export default {
                 this.$toast("密码格式不正确");
                 return;
             }
+               //判断验证码内容与用户输入的内容
+               if(this.code==""){
+                this.$toast('请输入验证码！');
+                return;
+            }
+            if(this.identifyCode!==this.code){
+                this.code="";
+                this.refreshCode();
+                this.$toast("验证码错误")
+                return;
+            }
             //5.发送ajax请求 axios
             var url="login";//请求地址
             var obj={uname:n,upwd:p};
@@ -97,6 +108,9 @@ export default {
                     //将登录用户的uname和uid保存到sessionStorage
                     sessionStorage.setItem("uname",n);
                     sessionStorage.setItem("uid",result.data.uid);
+                    //获取登录用户的用户名
+                    var uname = sessionStorage.getItem("uname")
+                    this.$messagebox("欢迎"+uname+"回来")
                     // console.log(sessionStorage);
                 }
                 //3.创建Home.vue组件
@@ -105,17 +119,6 @@ export default {
                     this.$messagebox("提示","用户信息错误")
                 }
             })
-            //判断验证码内容与用户输入的内容
-            if(this.code==""){
-                this.$toast('请输入验证码！');
-                return;
-            }
-            if(this.identifyCode!==this.code){
-                this.code="";
-                this.refreshCode();
-                this.$toast("验证码错误")
-                return;
-            }
             //跳转购物车
             this.$router.push("/cart")
         },

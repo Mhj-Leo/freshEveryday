@@ -61,7 +61,8 @@
                             var pr=elem.price;
                             var t=elem.title;
                             var n=elem.num;
-                            var uid = 1;
+                            var uid = sessionStorage.getItem("uid");
+                            console.log(uid)
                             var obj = {pic:p,price:pr,title:t,num:n,uid:uid}
                             this.axios.get("submit",{params:obj})
                             .then(result=>{
@@ -90,6 +91,7 @@
     }
 </script>
 <style scoped>
+    .hide{display:none}
     .container{
         height:1000px;
         position:relative;

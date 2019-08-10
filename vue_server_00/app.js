@@ -36,7 +36,7 @@ server.get("/login",(req,res)=>{
   var upwd = req.query.upwd;
   //1.1:正则表达式验证用户名或密码
   //2:sql
-var sql = "SELECT id FROM ";
+var sql = "SELECT * FROM ";
 sql +=" freshEveryday_user WHERE uname = ?";
 sql +=" AND upwd = md5(?)";
   //3:json
@@ -47,7 +47,7 @@ sql +=" AND upwd = md5(?)";
       }else{
          //把当前登录用户的uid保存到session对象
           req.session.uid=result[0].id;
-         res.send({code:1,msg:"登录成功"});
+         res.send({code:1,msg:"登录成功",uid:result[0].id});
       }
   })
 })
